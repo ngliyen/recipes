@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  /* outline: 1px solid red; */
+}
+
+.flash {
+  color: red;
+  font-size: 12px;
+}
+
+.box-1 {
+  height: 100px;
+}

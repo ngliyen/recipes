@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/my_style.css') }}">
+  <title>Recipes</title>
+</head>
+<body>
+    <div class="container w-50 mt-5 d-flex flex-column">
+      <!-- Top Bar -->
+      <nav class="d-flex justify-content-between">
+        <h1>Add New Recipe</h1>
+        <div class="d-flex align-items-center">
+          <a href="/dashboard" class="me-5">Dashboard</a>
+          <a href="/logout">Logout</a>
+        </div>
+      </nav>
+    
+      <form action="/add/recipe" method="post" class="d-flex justify-content-between">
+          <!-- Left Form -->
+          <div class="d-flex flex-column col me-5">
+            <label for="name">Name:</label>
+            <div class="flash">
+              {% with messages = get_flashed_messages(category_filter=['name']) %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
+            <input type="text" name="name" class="w-75 mb-3 border border-dark border-3">
+            <label for="description">Description:</label>
+            <div class="flash">
+              {% with messages = get_flashed_messages(category_filter=['description']) %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
+            <input type="text" name="description" class="w-100 mb-3 border border-dark border-3 box-1">
+            <label for="instructions" >Instructions: </label>
+            <div class="flash">
+              {% with messages = get_flashed_messages(category_filter=['instructions']) %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
+            <input type="textarea" name="instructions" class="w-100 mb-3 border border-dark border-3 box-1">
+            <button type="submit" class="btn btn-dark w-25">Create</button>
+          </div>
+          <!-- Right Form -->
+          <div class="d-flex flex-column col">
+            <label for="created_at">Date Made On:</label>
+            <div class="flash">
+              {% with messages = get_flashed_messages(category_filter=['created_at']) %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <p>{{ message }}</p>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
+            <input type="date" name="created_at" class="w-50 mb-3 border border-dark border-3">
+            <fieldset>
+              <legend class="col-form-label">Under 30 Minutes?</legend>
+              <div class="flash">
+                {% with messages = get_flashed_messages(category_filter=['under_30_mins']) %}
+                  {% if messages %}
+                    {% for message in messages %}
+                      <p>{{ message }}</p>
+                    {% endfor %}
+                  {% endif %}
+                {% endwith %}
+              </div>
+              <input type="radio" id="Yes" name="under_30_mins" value="Yes" class="form-check-input me-1">
+              <label for="Yes" class="form-check-label me-3">Yes</label>
+              <input type="radio" id="No" name="under_30_mins" value="No" class="form-check-input me-1">
+              <label for="No" class="form-check-label">No</label> 
+            </fieldset>
+          </div>
+      </form>
+    </div>
+</body>
+</html>
