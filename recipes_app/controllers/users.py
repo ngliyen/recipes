@@ -9,23 +9,23 @@ bcrypt = Bcrypt(app)
 
 # this function returns the user if user is logged in and exists in our database,
 # else redirects and return false
-def user_logged_in():
-  # if no user logged in, redirect to login/registration page
-  if "user_id" not in session:
-    return False
+# def user_logged_in():
+#   # if no user logged in, redirect to login/registration page
+#   if "user_id" not in session:
+#     return False
 
-  data = {
-    "user_id" : session["user_id"]
-  }
+#   data = {
+#     "user_id" : session["user_id"]
+#   }
 
-  logged_in_user = user.User.get_user_by_id(data)
+#   logged_in_user = user.User.get_user_by_id(data)
 
-  # if somehow managed to have user id in session but not in our database
-  if logged_in_user == False:
-    return False
+#   # # if somehow managed to have user id in session but not in our database
+#   # if logged_in_user == False:
+#   #   return False
   
-  # if user logged in
-  return logged_in_user
+#   # # if user logged in
+#   # return logged_in_user
 
 @app.route('/')
 def index():
@@ -68,23 +68,15 @@ def login():
 
 @app.route('/dashboard')
 def dashboard():
-  # # if no user logged in, redirect to login/registration page
-  # if "user_id" not in session:
-  #   return redirect('/')
-
-  # data = {
-  #   "user_id" : session["user_id"]
-  # }
-
-  # logged_in_user = user.User.get_user_by_id(data)
-
-  # # if somehow managed to have user id in session but not in our database
-  # if logged_in_user == False:
-  #   return redirect('/')
-  if user_logged_in() == False:
+  # if no user logged in, redirect to login/registration page
+  if "user_id" not in session:
     return redirect('/')
-  else:
-    logged_in_user = user_logged_in() 
+
+  data = {
+    "user_id" : session["user_id"]
+  }
+
+  logged_in_user = user.User.get_user_by_id(data)
 
   # get all recipes
   all_recipes = recipe.Recipe.get_all()

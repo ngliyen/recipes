@@ -45,20 +45,20 @@ class User:
   @classmethod
   def get_user_by_email(cls,data):
       query = "SELECT * FROM users WHERE email = %(email)s;"
-      result = connectToMySQL("recipes").query_db(query,data)
+      results = connectToMySQL("recipes").query_db(query,data)
       # Didn't find a matching user
-      if len(result) < 1:
+      if len(results) < 1:
           return False
-      return cls(result[0])
+      return cls(results[0])
   
   @classmethod
   def get_user_by_id(cls, data):
     query = "SELECT * FROM users WHERE id = %(user_id)s;"
-    result = connectToMySQL("recipes").query_db(query,data)
+    results = connectToMySQL("recipes").query_db(query,data)
     # Didn't find a matching user
-    if len(result) < 1:
+    if len(results) < 1:
         return False
-    return cls(result[0])
+    return cls(results[0])
   
   # @classmethod
   # def get_all(cls):

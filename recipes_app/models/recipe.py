@@ -30,7 +30,8 @@ class Recipe:
     query = "SELECT * FROM recipes WHERE id= %(recipe_id)s ;"
     results = connectToMySQL('recipes').query_db(query, data)
     if len(results) > 0:
-      return results[0]
+      # return results[0]
+      return cls(results[0])
     else:
       return False
 
@@ -79,6 +80,10 @@ class Recipe:
     # check that there's at least 3 characters
     elif len(recipe_data['description']) < 3:
       flash("Recipe description must have at least 3 characters.", "description")
+      is_valid = False
+    # check that it's not more than 255 characters (set varchar(255) in database)
+    elif len(recipe_data['description']) > 255:
+      flash("Recipe description must be less than 255 characters.", "description")
       is_valid = False
 
     # instructions
